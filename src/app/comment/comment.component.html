@@ -1,0 +1,26 @@
+<body >
+<div class="top-bar">
+  <h1>
+    My Forum
+  </h1>
+</div>
+<div class="main">
+  <div class="header">
+
+  </div>
+  <div>
+    <textarea
+      type = "text" [ngModel]="searchText" (ngModelChange)="searchComments($event)" placeholder="type here">
+    </textarea>
+  <button class="btn btn-primary" (click)="createComment()">Add new post</button>
+
+</div>
+  <div *ngFor="let commentData of displayCommentList">
+
+  </div>
+  <div class="comments">
+  </div>
+</div>
+
+
+</body>

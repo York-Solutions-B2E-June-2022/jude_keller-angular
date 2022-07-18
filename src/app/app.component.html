@@ -1,0 +1,13 @@
+
+
+<div *ngIf="!currentUser">
+  LOGIN
+  <app-login></app-login>
+  <app-register></app-register>
+</div>
+
+<div *ngIf="currentUser">
+  {{currentUser.username}}
+  <button (click)="onLogout()">logout</button>
+  <app-post></app-post>
+</div>
