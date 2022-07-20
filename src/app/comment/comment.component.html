@@ -1,25 +1,54 @@
-<body >
+<body>
 <div class="top-bar">
   <h1>
     My Forum
   </h1>
 </div>
-<div class="main">
-  <div class="header">
 
-  </div>
-  <div>
-    <textarea
-      type = "text" [ngModel]="searchText" (ngModelChange)="searchComments($event)" placeholder="type here">
+<div class="main">
+
+  <div class="container">
+    <label name="newComment">Add your comment below </label>
+    <textarea id="newComment"
+              [(ngModel)]="commentText"  placeholder="type here" class="post-area" >
     </textarea>
-  <button class="btn btn-primary" (click)="createComment()">Add new post</button>
+  <button id="addComments" class="btn btn-primary" (click)="addComment()">Add Comment</button>
+    <div id="allComments"></div>
+
+
+
+    <div>
+      <h1>
+        Comment Section
+      </h1>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div *ngFor="let comment of commentList">
+         {{comment.text}}
+      </div>
+      <br>
+      <br>
+      <div>
+        <button (click)="deleteComments()" id="deleteComments" class="btn btn-secondary">Delete Comments</button>
+        <button (click)="editComments()" id="editComments" class="btn btn-secondary">Edit Comment</button>
+      </div>
+    </div>
 
 </div>
-  <div *ngFor="let commentData of displayCommentList">
+<!--  <div *ngFor="let commentData of commentList">-->
+<!--    <script>-->
+<!--      var x= document.getElementsByClassName("post-are").value-->
+<!--    </script>-->
+<!--  </div>-->
+<!--  <div class="comments">-->
+<!--    <script>-->
+<!--      var x= document.getElementsByClassName("post-are").value-->
+<!--    </script>-->
+<!--  </div>-->
 
-  </div>
-  <div class="comments">
-  </div>
 </div>
 
 

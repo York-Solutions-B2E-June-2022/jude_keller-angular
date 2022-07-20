@@ -10,17 +10,18 @@ export class DataService {
 
   currentUser$ = new Subject<IUser | null>();
   userList: Array<IUser> = [{id: uuid(), username: "test", password: "pass"}];
-  commentList: Array<string> = [];
+  commentList: Array<any> = [];
+  commentList$ = new Subject<Array<any>>()
 
   constructor() {
 
   }
 
   onLogin(username: string, password: string): boolean {
-const foundUser = this.userList.find(u => u.username === username)
-    if (foundUser && foundUser.password === password){
+    const foundUser = this.userList.find(u => u.username === username)
+    if (foundUser && foundUser.password === password) {
       this.currentUser$.next(foundUser);
-return true
+      return true
     }
     return false
   }
@@ -29,27 +30,48 @@ return true
     this.currentUser$.next(null);
   }
 
- createUser(username: string, password: string): string {
+  createUser(username: string, password: string): string {
     if (!username || !password) {
       return "username or password cannot be empty"
     }
-   if (username.length < 4 || password.length < 4) {
-     return "username and password must be greater than 4 characters."
-   }
+    if (username.length < 4 || password.length < 4) {
+      return "username and password must be greater than 4 characters."
+    }
 
-   const foundUser = this.userList.find(u => u.username === username);
-   if (foundUser) {
-     return "username is taken"
-   }
-   const newUser: IUser = {
-     id: uuid(),
-     username: username,
-     password: password
-   }
+    const foundUser = this.userList.find(u => u.username === username);
+    if (foundUser) {
+      return "username is taken"
+    }
+    const newUser: IUser = {
+      id: uuid(),
+      username: username,
+      password: password
+    }
 
-   this.userList.push(newUser);
-   console.log(this.userList)
-   return "account created";
+    this.userList.push(newUser);
+    console.log(this.userList)
+    return "account created";
+  }
+
+  createComment(comment: any) {
+    this.commentList.push(comment)
+    console.log(this.commentList)
+  }
+
+ deleteComment(){
+this.commentList = []
+   this.commentList$.next(this.commentList)
+   console.log(this.commentList)
  }
+
+  editComment() {
+    this.commentList = this.commentList.filter(
+      (comment: any) => {
+        comment.text.includes(this.commentList)
+        console.log(this.commentList)
+
+      }
+    )
+  }
 
 }

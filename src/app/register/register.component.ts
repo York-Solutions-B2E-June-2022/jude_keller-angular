@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
   onRegister(){
     this.result = this.dataService.createUser(this.username, this.password);
+    return "account registered"
 
 console.log("register button works")
   }
